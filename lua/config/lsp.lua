@@ -46,6 +46,7 @@ local servers = {
     rust_analyzer = true,
     templ = true,
     intelephense = true,
+    ts_ls = true,
     jsonls = {
         server_capabilities = {
             documentFormattingProvider = false,
