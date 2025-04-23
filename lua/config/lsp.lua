@@ -121,6 +121,7 @@ masonToolInstaller.setup({
         "gopls",
         "html",
         "intelephense",
+        "jsonls",
         "lemminx",
         "lua_ls",
         "marksman",
