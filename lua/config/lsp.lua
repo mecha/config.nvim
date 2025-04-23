@@ -199,3 +199,22 @@ keyset("", "<leader>l", function()
         })
     end
 end, { desc = "Toggle lsp_lines" })
+
+local border = {
+    { "╭", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╮", "FloatBorder" },
+    { "│", "FloatBorder" },
+    { "╯", "FloatBorder" },
+    { "─", "FloatBorder" },
+    { "╰", "FloatBorder" },
+    { "│", "FloatBorder" },
+}
+
+local orig_open_floating_preview = vim.lsp.util.open_floating_preview
+---@diagnostic disable-next-line: duplicate-set-field
+vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
+    opts = opts or {}
+    opts.border = opts.border or border
+    return orig_open_floating_preview(contents, syntax, opts, ...)
+end
