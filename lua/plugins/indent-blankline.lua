@@ -4,7 +4,7 @@ return {
         main = "ibl",
         opts = {
             indent = {
-                highlight = "Conceal",
+                highlight = "LineNr",
                 char = "┊",
             },
         },
