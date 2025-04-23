@@ -169,8 +169,21 @@ vim.api.nvim_create_autocmd("LspAttach", {
     end,
 })
 
+vim.diagnostic.config({
+    virtual_text = true,
+    virtual_lines = false,
+    underline = true,
+    signs = {
+        text = {
+            [vim.diagnostic.severity.ERROR] = "󰅚 ",
+            [vim.diagnostic.severity.WARN] = "󰀪 ",
+            [vim.diagnostic.severity.HINT] = "󰅚 ",
+            [vim.diagnostic.severity.INFO] = " ",
+        },
+    },
+})
+
 require("lsp_lines").setup()
-vim.diagnostic.config({ virtual_text = true, virtual_lines = false })
 
 keyset("", "<leader>l", function()
     local config = vim.diagnostic.config() or {}
