@@ -152,9 +152,17 @@ vim.api.nvim_create_autocmd("LspAttach", {
         local telescope_bi = require("telescope.builtin")
 
         vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
-        keyset("n", "gra", vim.lsp.buf.code_action, { buffer = 0 })
         keyset("n", "gO", telescope_bi.lsp_document_symbols, { buffer = 0 })
         keyset("i", "<C-k>", vim.lsp.buf.signature_help, { desc = "Hover" })
+        keyset("n", "gra", vim.lsp.buf.code_action, { buffer = 0 })
+        keyset("n", "grA", function()
+            vim.lsp.buf.code_action({
+                context = {
+                    only = { "source" },
+                    diagnostics = {},
+                },
+            })
+        end, { buffer = 0 })
 
         -- Override server capabilities
         if settings.server_capabilities then
