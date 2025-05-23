@@ -12,7 +12,7 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.number = true
 vim.opt.relativenumber = true
 
-vim.opt.wrap = true
+vim.opt.wrap = false
 vim.opt.linebreak = true
 
 vim.opt.undodir = os.getenv("HOME") .. "/.cache/nvim/undodir"
