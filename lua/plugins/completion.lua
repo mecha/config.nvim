@@ -20,12 +20,13 @@ return {
             })
 
             local tw_colorizer = require("tailwindcss-colorizer-cmp")
-            tw_colorizer.setup { color_square_width = 2 }
+            tw_colorizer.setup({ color_square_width = 2 })
 
             local cmp = require("cmp")
+            local compare = require("cmp.config.compare")
             local types = require("cmp.types")
 
-            cmp.setup {
+            cmp.setup({
                 sources = {
                     { name = "lazydev", group_index = 0 },
                     { name = "nvim_lsp" },
@@ -36,25 +37,25 @@ return {
                     ["<C-Space>"] = {
                         i = cmp.mapping.complete(),
                     },
-                    ["<C-n>"] = cmp.mapping.select_next_item {
+                    ["<C-n>"] = cmp.mapping.select_next_item({
                         behavior = types.cmp.SelectBehavior.Insert,
-                    },
-                    ["<C-p>"] = cmp.mapping.select_prev_item {
+                    }),
+                    ["<C-p>"] = cmp.mapping.select_prev_item({
                         behavior = types.cmp.SelectBehavior.Insert,
-                    },
-                    ["<C-e>"] = cmp.mapping.abort(),
+                    }),
+                    ["<C-d>"] = cmp.mapping.abort(),
                     ["<C-y>"] = cmp.mapping(
-                        cmp.mapping.confirm {
+                        cmp.mapping.confirm({
                             select = true,
                             behavior = types.cmp.SelectBehavior.Insert,
-                        },
+                        }),
                         { "i", "c" }
                     ),
                 },
                 formatting = {
                     expandable_indicator = true,
                     format = function(entry, item)
-                        local lspkind_format = lspkind.cmp_format {
+                        local lspkind_format = lspkind.cmp_format({
                             mode = "symbol",
                             menu = {
                                 buffer = "[buf]",
@@ -63,7 +64,7 @@ return {
                                 nvim_lua = "[api]",
                                 path = "[path]",
                             },
-                        }
+                        })
 
                         item = lspkind_format(entry, item)
                         item = tw_colorizer.formatter(entry, item)
@@ -75,22 +76,30 @@ return {
                         require("luasnip").lsp_expand(args.body)
                     end,
                 },
+                matching = {
+                    disallow_fuzzy_matching = false,
+                    disallow_fullfuzzy_matching = false,
+                    disallow_partial_fuzzy_matching = false,
+                    disallow_partial_matching = false,
+                    disallow_prefix_unmatching = false,
+                    disallow_symbol_nonprefix_matching = false,
+                },
                 sorting = {
-                    priority_weight = 2,
+                    priority_weight = 5.0,
                     comparators = {
-                        cmp.offset,
-                        cmp.exact,
-                        -- cmp.scopes,
-                        cmp.score,
-                        cmp.recently_used,
-                        cmp.locality,
-                        cmp.kind,
-                        cmp.sort_text,
-                        cmp.length,
-                        cmp.order,
+                        compare.score,
+                        compare.scopes,
+                        compare.locality,
+                        compare.recently_used,
+                        compare.offset,
+                        compare.length,
+                        compare.exact,
+                        -- compare.kind,
+                        -- compare.sort_text,
+                        -- compare.order,
                     },
                 },
-            }
+            })
 
             cmp.setup.cmdline({ "/", "?" }, {
                 mapping = cmp.mapping.preset.cmdline(),
