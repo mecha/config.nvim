@@ -22,6 +22,7 @@ local lspconfig = require("lspconfig")
 
 local servers = {
     bashls = true,
+    editorconfig = true,
     gopls = {
         manual_install = true,
         settings = {
@@ -46,6 +47,7 @@ local servers = {
     rust_analyzer = true,
     templ = true,
     intelephense = true,
+    cssls = true,
     ts_ls = true,
     jsonls = {
         server_capabilities = {
@@ -119,6 +121,7 @@ masonToolInstaller.setup({
         "clangd",
         "cssls",
         "delve",
+        "editorconfig-checker",
         "gopls",
         "html",
         "intelephense",
