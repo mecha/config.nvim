@@ -129,6 +129,7 @@ masonToolInstaller.setup({
         "lemminx",
         "lua_ls",
         "marksman",
+        "prettierd",
         "psalm",
         "sqlls",
         "stylua",

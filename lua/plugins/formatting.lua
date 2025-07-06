@@ -5,6 +5,7 @@ return {
             formatters_by_ft = {
                 lua = { "stylua" },
                 go = { "goimports", "gofmt" },
+                css = { "prettierd", stop_after_first = true },
                 javascript = { "prettierd", stop_after_first = true },
                 typescript = { "prettierd", stop_after_first = true },
             },
