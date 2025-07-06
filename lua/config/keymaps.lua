@@ -2,7 +2,6 @@ local set = vim.keymap.set
 
 -- can't curb the habit
 set({ "n", "v" }, "<C-s>", ":w<cr>", { desc = "Save", silent = true })
-set("i", "<C-s>", "<esc>:w<cr>a", { desc = "Save", silent = true })
 
 -- void register ops
 vim.keymap.set("n", "_d", '"_d')
