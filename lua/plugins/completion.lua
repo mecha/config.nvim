@@ -27,6 +27,7 @@ return {
             local types = require("cmp.types")
 
             cmp.setup({
+                preselect = cmp.PreselectMode.None,
                 sources = {
                     { name = "lazydev", group_index = 0 },
                     { name = "nvim_lsp" },
