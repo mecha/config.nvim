@@ -22,7 +22,6 @@ local lspconfig = require("lspconfig")
 
 local servers = {
     bashls = true,
-    editorconfig = true,
     gopls = {
         manual_install = true,
         settings = {
@@ -121,7 +120,6 @@ masonToolInstaller.setup({
         "clangd",
         "cssls",
         "delve",
-        "editorconfig-checker",
         "gopls",
         "html",
         "intelephense",
