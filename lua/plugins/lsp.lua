@@ -9,6 +9,10 @@ return {
             "WhoIsSethDaniel/mason-tool-installer.nvim", -- ensure some tools are installed at startup, uses mason
             "williamboman/mason-lspconfig.nvim", -- configure mason-installed tools with lspconfig
             { "folke/lazydev.nvim", ft = "lua", opts = {} }, -- configure LSP for Neovim config & plugin development
+            {
+                "pmizio/typescript-tools.nvim",
+                dependencies = { "nvim-lua/plenary.nvim" },
+            },
         },
         config = function()
             require("config.lsp")

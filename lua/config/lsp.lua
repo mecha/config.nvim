@@ -229,3 +229,13 @@ vim.lsp.util.open_floating_preview = function(contents, syntax, opts, ...)
     opts.border = opts.border or border
     return orig_open_floating_preview(contents, syntax, opts, ...)
 end
+
+require("typescript-tools").setup({
+    settings = {
+        expose_as_code_action = {
+            "add_missing_imports",
+            "remove_unused_imports",
+            "organize_imports",
+        },
+    },
+})
