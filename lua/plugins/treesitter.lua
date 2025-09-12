@@ -100,4 +100,14 @@ return {
     { "nvim-treesitter/playground" },
     -- Add selection objects for classes, functions, params, args, etc.
     { "nvim-treesitter/nvim-treesitter-textobjects" },
+    -- Show context at the top of the buffer (function, class, loop, etc.)
+    {
+        "nvim-treesitter/nvim-treesitter-context",
+        opts = {
+            enable = true,
+            mode = 'topline',
+            line_numbers = true,
+            multiline_threshold = 1,
+        },
+    },
 }
