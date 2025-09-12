@@ -122,6 +122,7 @@ masonToolInstaller.setup({
         "delve",
         "gopls",
         "html",
+        "hyprls",
         "intelephense",
         "jsonls",
         "lemminx",
