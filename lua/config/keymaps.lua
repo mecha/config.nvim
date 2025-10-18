@@ -59,5 +59,5 @@ vim.keymap.set("n", "<leader>gh", function()
     vim.fn.execute("!tmux popup -y 0 -w 100\\% -h 94\\% -E lazygit -f %", "silent")
 end, { silent = true })
 
--- gypical golang experience described in 1 line
+-- typical golang experience described in 1 line
 vim.keymap.set("n", "<leader>ee", "oif err != nil {<cr>}<esc>Oreturn err<esc><left><left>")
