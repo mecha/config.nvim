@@ -83,9 +83,9 @@ local servers = {
 }
 
 for name, config in pairs(servers) do
-    local enabled = (config ~= false)
-    vim.lsp.enable(name, enabled)
-
+    if name ~= "*" and config ~= false then
+        vim.lsp.enable(name)
+    end
     if type(config) == "table" then
         vim.lsp.config(name, config)
     end
