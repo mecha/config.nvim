@@ -7,3 +7,14 @@ vim.api.nvim_create_autocmd("TextYankPost", {
         vim.highlight.on_yank({ higroup = 'IncSearch', timeout = 150 })
     end,
 })
+
+vim.api.nvim_create_autocmd({'BufEnter', 'BufWinEnter'}, {
+    pattern = {"*.hl", "hypr*.conf"},
+    callback = function()
+        vim.lsp.start {
+            name = "hyprlang",
+            cmd = {"hyprls"},
+            root_dir = vim.fn.getcwd(),
+        }
+    end
+})

@@ -1,63 +1,79 @@
-local set = vim.keymap.set
+local keymap = function(desc, mode, key, action)
+    vim.keymap.set(mode, key, action, { desc = desc, silent = true })
+end
 
--- can't curb the habit
-set({ "n", "v" }, "<C-s>", ":w<cr>", { desc = "Save", silent = true })
+keymap("Save™ Classic Pro Max", "n", "<C-s>", ":update<cr>")
 
--- void register ops
-vim.keymap.set("n", "_d", '"_d')
-vim.keymap.set("v", "_p", '"_dP')
+keymap("Delete into void reg", { "n", "v" }, "_d", '"_d')
+keymap("Paste re-yank into void reg", "v", "_p", '"_dP')
 
 -- keep cursor in the middle of the screen
-vim.keymap.set("n", "n", "nzzzv", { desc = "Next result" })
-vim.keymap.set("n", "N", "Nzzzv", { desc = "Prev result" })
-vim.keymap.set("n", "<C-u>", "<C-u>zz", { desc = "Up half-page" })
-vim.keymap.set("n", "<C-d>", "<C-d>zz", { desc = "Down half-page" })
+keymap("Next result", "n", "n", "nzzzv")
+keymap("Prev result", "n", "N", "Nzzzv")
+keymap("Up half-page", "n", "<C-u>", "<C-u>zz")
+keymap("Down half-page", "n", "<C-d>", "<C-d>zz")
 
--- line splitting
-set("n", "L", "i<cr><esc><up>$", { desc = "Split line" })
-set("n", "cL", "i<cr><esc><up>$a", { desc = "Split line & insert" })
+keymap("Split line", "n", "L", "i<cr><esc><up>$")
+keymap("Split line & insert", "n", "cL", "i<cr><esc><up>$a")
 
--- actually useful help
-set({ "n", "v", "i" }, "<F1>", "<esc>:Telescope help_tags<cr>", { desc = "help", silent = true })
+keymap("help", { "n", "v", "i" }, "<F1>", "<esc>:Telescope help_tags<cr>")
 
--- window splitting
-set("n", "<leader>H", ":vsplit<cr>", { desc = "Split vertically" })
-set("n", "<leader>V", ":split<cr>", { desc = "Split horizontally" })
+keymap("Split vertically", "n", "<leader>H", ":vsplit<cr>")
+keymap("Split horizontally", "n", "<leader>V", ":split<cr>")
 
--- moving lines up/down
-vim.keymap.set("n", "<A-Up>", "V:m .-2<cr>==gv<esc>", { desc = "Move line up" })
-vim.keymap.set("n", "<A-Down>", "V:m .+1<cr>==gv<esc>", { desc = "Move line down" })
-vim.keymap.set("v", "<A-Up>", ":m '<-2<CR>gv=gv", { desc = "Move selection up" })
-vim.keymap.set("v", "<A-Down>", ":m '>+1<CR>gv=gv", { desc = "Move selection down" })
-vim.keymap.set("i", "<A-Up>", "<esc>V:m .-2<cr>==gi", { desc = "Move up" })
-vim.keymap.set("i", "<A-Down>", "<esc>V:m .+1<cr>==gi", { desc = "Move down" })
+keymap("Move line up", "n", "<A-Up>", "V:m .-2<cr>==gv<esc>")
+keymap("Move line down", "n", "<A-Down>", "V:m .+1<cr>==gv<esc>")
+keymap("Move selection up", "v", "<A-Up>", ":m '<-2<CR>gv=gv")
+keymap("Move selection down", "v", "<A-Down>", ":m '>+1<CR>gv=gv")
+keymap("Move up", "i", "<A-Up>", "<esc>V:m .-2<cr>==gi")
+keymap("Move down", "i", "<A-Down>", "<esc>V:m .+1<cr>==gi")
 
--- moving lines left/right
-vim.keymap.set("n", "<A-Left>", "<<", { desc = "Indent left" })
-vim.keymap.set("n", "<A-Right>", ">>", { desc = "Indent right" })
-vim.keymap.set("v", "<A-Left>", "<gv", { desc = "Indent left" })
-vim.keymap.set("v", "<A-Right>", ">gv", { desc = "Indent right" })
-vim.keymap.set("i", "<A-Left>", "<esc><<a", { desc = "Indent left" })
-vim.keymap.set("i", "<A-Right>", "<esc>>>a", { desc = "Indent right" })
+keymap("Indent left", "n", "<A-Left>", "<<")
+keymap("Indent left", "v", "<A-Left>", "<gv")
+keymap("Indent left", "i", "<A-Left>", "<esc><A-Left>a")
+keymap("Indent right", "n", "<A-Right>", ">>")
+keymap("Indent right", "v", "<A-Right>", ">gv")
+keymap("Indent right", "i", "<A-Right>", "<esc><A-Right>a")
 
 -- interactive search and replace
-local function interactiveReplace(whole_file)
+local function iReplace(whole_file)
     vim.ui.input({ prompt = "Search: " }, function(search)
-        if search == nil then return end
+        if search == nil then
+            return
+        end
         vim.ui.input({ prompt = "Replace: " }, function(replace)
-            if replace == nil then return end
+            if replace == nil then
+                return
+            end
             local pre = whole_file and "%" or ""
             vim.cmd(pre .. "s/" .. search .. "/" .. replace .. "/g")
         end)
     end)
 end
-set("n", "<leader>rl", function() interactiveReplace(false) end)
-set("n", "<leader>rf", function() interactiveReplace(true) end)
+keymap("Replace in line", "n", "<leader>rl", function()
+    iReplace(false)
+end)
+keymap("Replace in file", "n", "<leader>rf", function()
+    iReplace(true)
+end)
 
--- git history of current file
-vim.keymap.set("n", "<leader>gh", function()
-    vim.fn.execute("!tmux popup -y 0 -w 100\\% -h 94\\% -E lazygit -f %", "silent")
-end, { silent = true })
+keymap(
+    "Commit history",
+    "n",
+    "<leader>gh",
+    ":!tmux popup -y 0 -w 100\\% -h 94\\% -E lazygit -f %<cr>"
+)
 
--- typical golang experience described in 1 line
-vim.keymap.set("n", "<leader>ee", "oif err != nil {<cr>}<esc>Oreturn err<esc><left><left>")
+-- the golang experience
+keymap(
+    "[GO] Return error",
+    "n",
+    "<leader>ee",
+    "oif err != nil {<cr>}<esc>Oreturn err<esc><left><left>"
+)
+keymap(
+    "[GO] Fatal error",
+    "n",
+    "<leader>ef",
+    "oif err != nil {<cr>}<esc>Olog.Fatal(err)<esc><left><left>"
+)

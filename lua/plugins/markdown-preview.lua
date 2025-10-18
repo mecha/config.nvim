@@ -9,7 +9,7 @@ return {
         },
         init = function()
             vim.g.mkdp_filetypes = { "markdown" }
-            vim.g.mkdp_port = 9000
+            vim.g.mkdp_port = 4444
             vim.g.mkdp_auto_close = 0
             vim.g.mkdp_echo_preview_url = 1
         end,
