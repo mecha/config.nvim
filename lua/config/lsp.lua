@@ -1,5 +1,6 @@
 local keyset = vim.keymap.set
 
+-- fidget shows LSP progress in the bottom right corner
 local fidget = require("fidget")
 fidget.setup({
     notification = { window = { winblend = 0 } },
@@ -13,14 +14,11 @@ fidget.setup({
     },
 })
 
-local capabilities = nil
-if pcall(require, "cmp_nvim_lsp") then
-    capabilities = require("cmp_nvim_lsp").default_capabilities()
-end
-
-local lspconfig = require("lspconfig")
-
+-- configs for lsps, true/false to enable/disable respectively
 local servers = {
+    ["*"] = {
+        root_markers = { ".git" },
+    },
     bashls = true,
     gopls = {
         manual_install = true,
@@ -85,19 +83,15 @@ local servers = {
 }
 
 for name, config in pairs(servers) do
-    if config == true then
-        config = {}
-    end
-    config = vim.tbl_deep_extend(
-        "force",
-        {},
-        { capabilities = capabilities },
-        config
-    )
+    local enabled = (config ~= false)
+    vim.lsp.enable(name, enabled)
 
-    lspconfig[name].setup(config)
+    if type(config) == "table" then
+        vim.lsp.config(name, config)
+    end
 end
 
+-- mason is used to install LSPs, formatters, and other tools
 local mason = require("mason")
 mason.setup({
     ui = {
@@ -112,6 +106,7 @@ mason.setup({
     },
 })
 
+-- this uses mason to auto-install some stuff
 local masonToolInstaller = require("mason-tool-installer")
 masonToolInstaller.setup({
     ensure_installed = {
