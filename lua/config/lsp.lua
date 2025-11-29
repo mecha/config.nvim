@@ -41,6 +41,7 @@ local servers = {
             semanticTokensProvider = vim.NIL,
         },
     },
+    gdscript = true,
     rust_analyzer = true,
     templ = true,
     intelephense = true,
