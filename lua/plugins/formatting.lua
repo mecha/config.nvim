@@ -15,6 +15,11 @@ return {
             default_format_opts = {
                 lsp_format = "fallback",
             },
+            formatters = {
+                clang_format = {
+                    prepend_args = { "--style=file", "--fallback-style=LLVM" },
+                },
+            },
         },
         keys = {
             {
