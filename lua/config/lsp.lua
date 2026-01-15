@@ -20,6 +20,7 @@ local servers = {
         root_markers = { ".git" },
     },
     bashls = true,
+    clangd = true,
     gopls = {
         manual_install = true,
         settings = {
