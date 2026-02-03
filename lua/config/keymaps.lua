@@ -64,6 +64,8 @@ keymap(
     ":!tmux popup -y 0 -w 100\\% -h 94\\% -E lazygit -f %<cr>"
 )
 
+keymap("Open floating diagnostic", "n", "<leader>xf", vim.diagnostic.open_float)
+
 -- the golang experience
 keymap(
     "[GO] Return error",
