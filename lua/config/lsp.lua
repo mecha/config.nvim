@@ -15,6 +15,7 @@ fidget.setup({
 })
 
 -- configs for lsps, true/false to enable/disable respectively
+---@type table<string, vim.lsp.Config|boolean>
 local servers = {
     ["*"] = {
         root_markers = { ".git" },
@@ -43,9 +44,10 @@ local servers = {
         },
     },
     gdscript = true,
-    rust_analyzer = true,
+    rust_analyzer = {},
     templ = true,
     intelephense = true,
+    kotlin_lsp = {},
     cssls = true,
     ts_ls = false, -- typescript-tools provides the LSP already
     jsonls = {
