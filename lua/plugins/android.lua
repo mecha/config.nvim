@@ -8,6 +8,14 @@ return {
             vim.keymap.set("n", "<leader>ar", android.build_and_run)
             vim.keymap.set("n", "<leader>ab", android.build_release)
             vim.keymap.set("n", "<leader>ac", android.clean)
+            vim.keymap.set("n", "<leader>al", function()
+                local android_sdk = vim.fn.expand(vim.fn.expand(vim.env.ANDROID_HOME or vim.g.android_sdk))
+                local adb = android_sdk .. "/platform-tools/adb"
+                local running_devices = android.get_running_devices(adb)
+                for _, value in ipairs(running_devices) do
+                    print(value.name)
+                end
+            end)
         end,
     },
 }
