@@ -1,6 +1,6 @@
 return {
     {
-        "RRethy/vim-illuminate",
+        "UrsaDK/vim-illuminate",
         config = function()
             require("illuminate").configure({
                 delay = 250,

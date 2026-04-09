@@ -1,13 +1,8 @@
 return {
     {
         -- Highlight colors in buffer
-        "NvChad/nvim-colorizer.lua",
-        opts = {
-            user_default_options = {
-                names = false,
-                tailwind = true,
-            },
-        },
+        "catgoose/nvim-colorizer.lua",
+        opts = {},
     },
     {
         -- show tailwind color hints in cmp menu

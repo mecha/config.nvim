@@ -7,6 +7,7 @@ return {
                 go = { "goimports", "gofmt" },
                 css = { "prettierd" },
                 html = { "prettierd" },
+                json = { "prettierd" },
                 javascript = { "prettierd" },
                 javascriptreact = { "prettierd" },
                 typescript = { "prettierd" },
