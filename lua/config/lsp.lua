@@ -50,6 +50,7 @@ local servers = {
     kotlin_lsp = {},
     cssls = true,
     ts_ls = false, -- typescript-tools provides the LSP already
+    marksman = {},
     jsonls = {
         server_capabilities = {
             documentFormattingProvider = false,
