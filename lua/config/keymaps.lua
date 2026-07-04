@@ -79,3 +79,15 @@ keymap(
     "<leader>ef",
     "oif err != nil {<cr>}<esc>Olog.Fatal(err)<esc><left><left>"
 )
+keymap(
+    "[GO] Panic error",
+    "n",
+    "<leader>ep",
+    "oif err != nil {<cr>}<esc>Opanic(err)<esc><left><left>"
+)
+keymap(
+    "[GO] HTTP error",
+    "n",
+    "<leader>eh",
+    "oif err != nil {<cr>}<esc>Ohttp.Error(w, err.Error(), 500)<esc><left><left>"
+)
