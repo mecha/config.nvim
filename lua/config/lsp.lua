@@ -129,7 +129,6 @@ masonToolInstaller.setup({
         "lua_ls",
         "marksman",
         "prettierd",
-        "psalm",
         "sqlls",
         "stylua",
         "tailwindcss",
