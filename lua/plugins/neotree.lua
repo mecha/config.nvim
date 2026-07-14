@@ -6,6 +6,7 @@ return {
             { "nvim-lua/plenary.nvim" },
             { "MunifTanjim/nui.nvim" },
         },
+        lazy = false,
         keys = {
             { mode = "n", "<leader>p",  ":Neotree filesystem position=current reveal_force_cwd toggle<CR>", silent = true },
             { mode = "n", "<leader>ft", ":Neotree filesystem right reveal_force_cwd toggle<CR>",            silent = true },
@@ -21,6 +22,7 @@ return {
             },
             filesystem = {
                 bind_to_cwd = true,
+                hijack_netrw_behavior = "open_current",
                 follow_current_file = { enabled = true },
                 use_libuv_file_watcher = true,
                 filtered_items = {
