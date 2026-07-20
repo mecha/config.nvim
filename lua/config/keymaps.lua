@@ -13,7 +13,7 @@ keymap("Prev result", "n", "N", "Nzzzv")
 keymap("Up half-page", "n", "<C-u>", "<C-u>zz")
 keymap("Down half-page", "n", "<C-d>", "<C-d>zz")
 
-keymap("Split line", "n", "L", "i<cr><esc><up>$")
+keymap("Split line", "n", "L", "i<cr><esc><up>$<left><right>")
 keymap("Split line & insert", "n", "cL", "i<cr><esc><up>$a")
 
 keymap("help", { "n", "v", "i" }, "<F1>", "<esc>:Telescope help_tags<cr>")
