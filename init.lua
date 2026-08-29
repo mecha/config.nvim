@@ -9,4 +9,6 @@ require("config.filetypes")
 require("config.journal")
 require("config.godot")
 
-vim.cmd("colorscheme viridescent")
+if vim.g.started_by_firenvim ~= true then
+    vim.cmd("colorscheme viridescent")
+end

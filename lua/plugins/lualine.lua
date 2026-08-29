@@ -4,6 +4,9 @@ return {
         dependencies = {
             { "nvim-tree/nvim-web-devicons", opts = {} }
         },
+        enabled = function ()
+            return vim.g.started_by_firenvim ~= true
+        end,
         opts = {
             options = {
                 theme = "auto",
