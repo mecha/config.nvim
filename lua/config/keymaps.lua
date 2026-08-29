@@ -91,3 +91,48 @@ keymap(
     "<leader>eh",
     "oif err != nil {<cr>}<esc>Ohttp.Error(w, err.Error(), 500)<esc><left><left>"
 )
+
+local function normalize_path(path)
+    local realpath = vim.uv.fs_realpath(path)
+    return vim.fs.normalize(realpath or path)
+end
+
+local function is_inside_dir(path, dir)
+    path = normalize_path(path)
+    dir = normalize_path(dir)
+
+    return path == dir or vim.startswith(path, dir .. "/")
+end
+
+keymap("Close buffers outside cwd", "n", "<leader>bc", function()
+    local cwd = vim.fn.getcwd()
+    local outside_cwd = {}
+
+    for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+        local path = vim.api.nvim_buf_get_name(buffer)
+
+        if
+            vim.api.nvim_buf_is_loaded(buffer)
+            and path ~= ""
+            and vim.bo[buffer].buftype == ""
+            and not is_inside_dir(path, cwd)
+        then
+            table.insert(outside_cwd, buffer)
+        end
+    end
+
+    if #outside_cwd == 0 then
+        print("No buffers outside " .. cwd)
+        return
+    end
+
+    local closed = 0
+    for _, buffer in ipairs(outside_cwd) do
+        local ok = pcall(vim.api.nvim_buf_delete, buffer, { force = false })
+        if ok then
+            closed = closed + 1
+        end
+    end
+
+    print("Closed " .. closed .. " buffers outside " .. cwd)
+end)
