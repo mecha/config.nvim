@@ -51,6 +51,7 @@ local servers = {
     cssls = true,
     ts_ls = false, -- typescript-tools provides the LSP already
     marksman = {},
+    qmlls = {},
     jsonls = {
         server_capabilities = {
             documentFormattingProvider = false,
